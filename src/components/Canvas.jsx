@@ -15,15 +15,11 @@ const CanvasEl = styled.canvas`
 const CanvasComponent = memo(({ canvasRef }) => <CanvasEl ref={canvasRef} />);
 
 const Canvas = () => {
-  const [canvasRef, setActiveObjectFill, canvas] = useCanvas();
-  const [isObjectActive, setIsObjectActive] = useState();
-  canvas.on('after:render', () => {
-    setIsObjectActive(canvas.getActiveObject())
-  });
+  const [canvasRef, setActiveObjectFill, activeObject] = useCanvas();
   return (
     <div>
       <CanvasComponent canvasRef={canvasRef} />
-      {isObjectActive && <ColorPalette setActiveObjectFill={setActiveObjectFill} />}
+      {activeObject && <ColorPalette setActiveObjectFill={setActiveObjectFill} />}
     </div>);
 };
 

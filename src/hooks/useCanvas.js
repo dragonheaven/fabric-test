@@ -5,6 +5,7 @@ import createFabricObject from "./../studio/object";
 const useCanvas = () => {
   const ref = useRef();
   const [canvas] = useState(createFabricCanvas());
+  const [activeObject, setActiveObject] = useState();
 
   useEffect(() => {
     canvas.initialize(ref.current, {
@@ -32,7 +33,12 @@ const useCanvas = () => {
     }
   }
 
-  return [setRef, setActiveObjectFill, canvas];
+
+  canvas.on('after:render', () => {
+    setActiveObject(canvas.getActiveObject())
+  });
+
+  return [setRef, setActiveObjectFill, activeObject];
 };
 
 export default useCanvas;
