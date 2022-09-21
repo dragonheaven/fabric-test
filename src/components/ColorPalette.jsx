@@ -7,13 +7,13 @@ const DivEl = styled.div`
   gap: 5px;
 `;
 
-const ColorPalette = (props) => {
+const ColorPalette = ({setActiveObjectFill}) => {
   const onChangeFill = (color) => {
-    props.setActiveObjectFill(color);
+    setActiveObjectFill(color);
   };
   return (
     <DivEl>
-      {COLORS.map(color =>  <button onClick={() => onChangeFill(color)}>{color}</button>)}
+      {COLORS.map(color =>  <button key={color} onClick={() => onChangeFill(color)}>{color}</button>)}
     </DivEl>
   );
 };

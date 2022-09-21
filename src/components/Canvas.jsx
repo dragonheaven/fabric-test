@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
 import styled from "styled-components";
 import useCanvas from "./../hooks/useCanvas";
 import ColorPalette from "./ColorPalette";
@@ -15,11 +15,15 @@ const CanvasEl = styled.canvas`
 const CanvasComponent = memo(({ canvasRef }) => <CanvasEl ref={canvasRef} />);
 
 const Canvas = () => {
-  const [canvasRef, setActiveObjectFill] = useCanvas();
+  const [canvasRef, setActiveObjectFill, canvas] = useCanvas();
+  const [isObjectActive, setIsObjectActive] = useState();
+  canvas.on('after:render', () => {
+    setIsObjectActive(canvas.getActiveObject())
+  });
   return (
     <div>
       <CanvasComponent canvasRef={canvasRef} />
-      <ColorPalette setActiveObjectFill={setActiveObjectFill} />
+      {isObjectActive && <ColorPalette setActiveObjectFill={setActiveObjectFill} />}
     </div>);
 };
 

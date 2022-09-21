@@ -32,7 +32,7 @@ const useCanvas = () => {
     }
   }
 
-  return [setRef, setActiveObjectFill];
+  return [setRef, setActiveObjectFill, canvas];
 };
 
 export default useCanvas;
